@@ -1,7 +1,7 @@
 <?php
-// script to create an rss feed from New York State Young Democrats' blog page with enclosures for podcast
+// script to create an rss feed from a single page listing all blog posts with enclosures for podcast
 include_once('simple_html_dom.php');
-$target_url = "http://www.nysyd.org/blog.php";
+$target_url = "YOUR_URL";
 function remote_file_size($url){ // found via Google
 	$head = ""; 
 	$url_p = parse_url($url); 
@@ -66,8 +66,8 @@ $html->load_file($target_url);
 	//get title of post
 	foreach($html->find('div.title-nobg h1 a') as $info)
 	{	
-		$feed[$numofitems]['link'] = "http://www.nysyd.org/" . $info->href;
-		$feed[$numofitems]['guid'] = "http://www.nysyd.org/" . $info->href;
+		$feed[$numofitems]['link'] = "YOUR_BASE_URL" . $info->href;
+		$feed[$numofitems]['guid'] = "YOUR_BASE_URL" . $info->href;
 		
 		$temptitle = $info->innertext;
 		$temptitle = preg_replace('/\x92/', '/\'/', $temptitle);
@@ -273,16 +273,16 @@ echo "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/conte
 echo "\n";
 echo "<channel>";
 echo "\n";
-echo "<title>New York State Young Democrats</title> \n";
-echo "<link>http://www.nysyd.org</link> \n";
+echo "<title>YOUR_FEED_NAME</title> \n";
+echo "<link>YOUR_BASE_URL</link> \n";
 echo "<image> \n";
-echo "<url>http://www.nysyd.org/images/nysyd_logo.png</url> \n";
-echo "<title>New York State Young Democrats</title> \n";
-echo "<link>http://www.nysyd.org</link> \n";
+echo "<url>YOUR_LOGO_URL</url> \n";
+echo "<title>YOUR_FEED_NAME</title> \n";
+echo "<link>YOUR_BASE_URL</link> \n";
 echo "</image> \n";
-echo "<description>The New York State Young Democrats are the official youth arm of the New York State Democratic Committee. The New York State Young Democrats represent young democrats between the ages of 16-36 living in all of New York's 62 counties. Members of the organization strive to make a positive difference in the community by working within the political process and upholding the principles of the Democratic Party. The membership base reflects the broad diversity of New York and the party, including high school students, college students, young workers, professionals and families.</description> \n";
+echo "<description>YOUR_FEED_DESCRIPTION</description> \n";
 echo "<language>en-us</language> \n";
-echo "<atom:link href=\"http://www.nysyd.org/rss/rss.php\" rel=\"self\" type=\"application/rss+xml\" /> \n";
+echo "<atom:link href=\"URL_TO_THIS_FILE\" rel=\"self\" type=\"application/rss+xml\" /> \n";
 $tempPubDate = sizeof($feed)-1; //date of first post
 echo "<pubDate>" . $feed[$tempPubDate]['date'] . "</pubDate> \n";
 echo "<lastBuildDate>" . $feed[0]['date'] . "</lastBuildDate>";
@@ -291,7 +291,7 @@ echo "\n\n";
   {
   echo "<item>" . "\n";
     echo "<title>" . $feed[$i]['title'] . "</title>" . "\n";
-	echo "<author> info@nysyd.net (" . $feed[$i]['author'] . ")</author>" . "\n";
+	echo "<author> YOUR_EMAIL_ADDRESS (" . $feed[$i]['author'] . ")</author>" . "\n";
 	echo "<pubDate>" . $feed[$i]['date'] . "</pubDate>" . "\n";
 	echo "<guid>" . $feed[$i]['guid'] . "</guid>" . "\n";
 	echo "<link>" . $feed[$i]['link'] . "</link>" . "\n";
