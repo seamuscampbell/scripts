@@ -3,7 +3,7 @@
 
 
 <?php
-include("phpFormGen/global.inc.php");
+include("global.inc.php");
 pt_register('POST','Subject');
 pt_register('POST','Message');
 pt_register('POST','Regard');
